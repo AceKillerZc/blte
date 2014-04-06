@@ -119,7 +119,7 @@ namespace blte
 						if (chunks [i].data.Length - 1 != chunks [i].decompSize) {
 							Console.WriteLine ("Possible error (1) !");
 						}
-						if (ext == "out")
+						if (onlyExt == null || ext == onlyExt)
 							f.Write (chunks [i].data, 1, chunks [i].decompSize);
 					}
 					break;
@@ -130,7 +130,7 @@ namespace blte
 						if ((i == 0 || i == 0)) {
 							ext = GetFileExt (dec, 0);
 						}
-						if (ext == "out")
+						if (onlyExt == null || ext == onlyExt)
 							f.Write (dec, 0, dec.Length);
 					}
 					break;
