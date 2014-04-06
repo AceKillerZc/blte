@@ -23,7 +23,7 @@ namespace blte
 			}
 			string output;
 
-			if (args.Length == 2) {
+			if (args.Length >= 2) {
 				output = args [1];
 			} else {
 				output = "out";

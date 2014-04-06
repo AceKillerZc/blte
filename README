@@ -1,0 +1,9 @@
+#BLTE Extractor
+Based on work of TOM_RUS
+
+##Usage:
+blte <blte_archive> [output_dir] [filetype]
+
+## Examples
+blte data.023 mp3 mp3 // would extract only mp3 files to the mp3 dir
+blte data.022 out // would extract all the files to the out dir
