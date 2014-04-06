@@ -46,23 +46,53 @@ namespace blte
 
 			string sExt = (ext == null) ? "all" : ext;
 			Console.WriteLine("Extracting {0} files from {1}", sExt, args[0]);
-
+			int count = 0;
 			while (br.BaseStream.Position != br.BaseStream.Length) {
 
 				long start = br.BaseStream.Position;
 
 				byte[] unkHash = br.ReadBytes(16);
 				int size = br.ReadInt32();
-				byte[] unks = br.ReadBytes(10);
+//				byte[] unks = br.ReadBytes(10);
 
-				Console.WriteLine ("Reading from {0} to {1}, unks: {2}", start, start + size, unks.ToHexString());
+				int unk1 = br.ReadInt16 ();
+				int unk2 = br.ReadInt16 ();
+				br.ReadBytes (6);
+				// 00 00 A2 68 58 7E E4 2E 41 4E
+
+				if (unk1 != 0 || size <= 0) {
+					// hack, terrible hack
+					Console.WriteLine ("Unk1 not 0");
+
+					bool seeking = true;
+
+					while (seeking && br.BaseStream.Position != br.BaseStream.Length) {
+
+
+						byte[] c = br.ReadBytes (4);
+
+						Console.WriteLine ("Trying looking at {0}, got {1}", br.BaseStream.Position, c.ToHexString());
+
+						if (c.ToHexString () == "424C5445") {
+							seeking = false;
+
+							Console.WriteLine ("Found next BLTE header at: {0}", br.BaseStream.Position);
+							br.BaseStream.Position -= 4;
+							br.BaseStream.Position -= 30;
+						} else {
+							br.BaseStream.Position -= 3;
+						}
+					}
+
+					continue;
+				}
+
+				Console.WriteLine ("Reading file #{2} from {0} to {1}", start, start + size, ++count);
 
 				BLTEHandler h = new BLTEHandler(br);
 				h.ExtractData(output, unkHash.ToHexString(), size, ext);
 
-				// Terrible hack, no idea why we need that
-				if (unkHash.ToHexString () == "14D641E2037AFFF75213E431F7015D79")
-					br.ReadBytes (13);
+
 			}
 
 
