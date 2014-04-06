@@ -45,7 +45,7 @@ namespace blte
 			int magic = reader.ReadInt32BE (); // BLTE (raw)
 
 			if (magic != 0x424c5445) {
-				Console.WriteLine ("Wrong Magic pos: {0}, start: {1} ", reader.BaseStream.Position, startPos);
+				Console.WriteLine ("Wrong Magic,name: {3} size: {2} pos: {0}, start: {1}", reader.BaseStream.Position, startPos, size, name);
 				throw new Exception ();
 				return;
 			}

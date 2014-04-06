@@ -53,13 +53,19 @@ namespace blte
 
 				byte[] unkHash = br.ReadBytes(16);
 				int size = br.ReadInt32();
-				int unk1 = br.ReadInt32 ();
-				int unk2 = br.ReadInt16 ();
-				int unk3 = br.ReadInt32 ();
+				byte[] unks = br.ReadBytes(10);
+
+				Console.WriteLine ("Reading from {0} to {1}, unks: {2}", start, start + size, unks.ToHexString());
 
 				BLTEHandler h = new BLTEHandler(br);
 				h.ExtractData(output, unkHash.ToHexString(), size, ext);
+
+				// Terrible hack, no idea why we need that
+				if (unkHash.ToHexString () == "14D641E2037AFFF75213E431F7015D79")
+					br.ReadBytes (13);
 			}
+
+
 		}
 	}
 
