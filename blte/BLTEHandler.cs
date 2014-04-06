@@ -254,8 +254,8 @@ namespace blte
 			else if (data [start + 0] == 0x53 && data [start + 1] == 0x4b && data [start + 2] == 0x49 && data [start + 3] == 0x4e)
 				return "blp";
 			else if (data [start + 0] == 0x57 && data [start + 1] == 0x44 && data [start + 2] == 0x42 && data [start + 3] == 0x43)
-				return "wdbc";
-			else if (data [start + 0] == 0x52 && data [start + 1] == 0x45 && data [start + 2] == 0x56 && data [start + 3] == 0x4d)
+				return "dbc";
+			else if (data[start + 0] == 0x52 && data[start + 1] == 0x45 && data[start + 2] == 0x56 && data[start + 3] == 0x4d)
 				return "skin"; // unknown file format
 			else if (data [start + 0] == 0x52 && data [start + 1] == 0x56 && data [start + 2] == 0x58 && data [start + 3] == 0x54)
 				return "rvxt"; // unknown file format
@@ -266,8 +266,10 @@ namespace blte
 			else if (data [start + 0] == 0x4d && data [start + 1] == 0x44 && data [start + 2] == 0x32)
 				return "m2";
 			else if (data [start + 0] == 0x57 && data [start + 1] == 0x44 && data [start + 2] == 0x42 && data [start + 3] == 0x32)
-				return "wdb2";
-			else if (data [start + 0] == 0x00 && data [start + 1] == 0x00 && data [start + 2] == 0x00)
+				return "db2";
+			else if (data[start + 0] == 0x53 && data[start + 1] == 0x59 && data[start + 2] == 0x48 && data[start + 3] == 0x50)
+				return "phys";
+			else if (data[start + 0] == 0x00 && data[start + 1] == 0x00 && data[start + 2] == 0x00)
 				return "unk"; // can not be guessed;
 			else {
 				byte[] header = new byte[3];
