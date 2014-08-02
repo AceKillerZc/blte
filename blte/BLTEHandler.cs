@@ -180,7 +180,7 @@ namespace blte
 			else if (data[start + 0] == 0x44 && data[start + 1] == 0x44 && data[start + 2] == 0x53)
 				return "dds";
 			else if (data[start + 0] == 0x4D && data[start + 1] == 0x5A && data[start + 2] == 0x90)
-				return "dll";
+				return "exe";
 			else if (data[start + 0] == 0x4D && data[start + 1] == 0x5A && data[start + 2] == 0x92)
 				return "dll";
 			else if (data[start + 0] == 0x43 && data[start + 1] == 0x46 && data[start + 2] == 0x58)
